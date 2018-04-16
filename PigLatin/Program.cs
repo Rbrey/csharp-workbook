@@ -19,7 +19,6 @@ namespace PigLatin
         {
             // your code goes here
             string[] words = word.Split(' ');
-            word = string.Empty;
             for (int i = 0; i < words.Length; i++)
             {
                 if (words[i].Length <= 1) continue;

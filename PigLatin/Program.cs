@@ -34,13 +34,14 @@ namespace PigLatin
                 return partTwo + partOne + "ay";
             }
 
-            // string[] words = word.Split(' ');
-            // string[] sentence = new string[] {};
-            // for (int i =0; i < words.Length; i++)
-            // {
-            //     upperCaseWords[i] = words[i].ToUpper();
-            // }
-            // string upperCaseWords = string.Join(' ', upperCaseWords);
+            string[] words = word.Split(' ');
+            string[] sentence = new string[] {};
+            for (int i =0; i < words.Length; i++)
+            {
+                sentence[i] = words[i];
+            }
+            string sentenceString = string.Join(' ', sentence);
+            Console.WriteLine(sentenceString);
 
             return firstVowel.ToString();
             return word;

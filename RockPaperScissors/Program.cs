@@ -6,49 +6,127 @@ namespace RockPaperScissors
     {
         public static void Main()
         {
-            Console.WriteLine("Enter hand 1:");
-            string hand1 = Console.ReadLine().ToLower();
-            Console.WriteLine("Enter hand 2:");
-            string hand2 = Console.ReadLine().ToLower();
-            Console.WriteLine(CompareHands(hand1, hand2));
+            bool keepPlaying = true;
+            int cScore = 0;
+            int pScore = 0;
+            while (keepPlaying && cScore < 5 && pScore < 5)
+            {            
+                Console.WriteLine("");
+                // Title
+                Console.WriteLine("===============================");
+                Console.WriteLine("******Rock Paper Scissors******");
+                Console.WriteLine("===============================");
+                // Player
+                Console.WriteLine("Enter Player Hand:");
+                Console.WriteLine("==================");
+                string player = Console.ReadLine().ToLower();
+                // Computer
+                Random comphand = new Random();
+                int computer = comphand.Next(3);
+                // Scoring
+                if (computer == 1)
+                {
+                    cScore++;
+                }
+                else if (computer == 2)
+                {
+                    pScore++;
+                }
+                // Win
+                if (cScore == 5)
+                {
+                    Console.WriteLine("COMPUTER WINS!");
+                }
+                else if (pScore == 5)
+                {
+                    Console.WriteLine("PLAYER WINS!");
+                }
 
+                Console.WriteLine(CompareHands(player, computer));
+                Console.WriteLine("==========");
+                Console.WriteLine("Scoreboard");
+                Console.WriteLine("==========");
+                Console.WriteLine("Player: " + pScore);
+                Console.WriteLine("Computer: " + cScore);
+            }
+            // Console.WriteLine("New Game? y/n");
+            // ConsoleKeyInfo cki = Console.ReadKey();
+            // keepPlaying = cki.KeyChar == 'y';
+            // Console.Clear();
+            
             // leave this command at the end so your program does not close automatically
-            Console.ReadLine();
+            // Console.ReadLine();
         }
-        
-        public static string CompareHands(string hand1, string hand2)
+        public static string CompareHands(string player, int computer)
         {
             // Your code here
-            if (hand1 == hand2)
+            if (computer == 0)
             {
-                return "It's a tie!";
-            }
-            if (hand1 == "rock")
-            {
-                if (hand2 == "scissors")
+                if (player == "rock")
                 {
-                    return "Hand one wins!";
+                    Console.WriteLine("Computer chooses Rock, it's a tie!");
                 }
-                return "Hand two wins!";
-            }
-            if (hand1 == "paper")
-            {
-                if (hand2 == "rock")
+                else if (player == "paper")
                 {
-                    return "Hand one wins!";
+                    Console.WriteLine("Computer chooses Paper, it's a tie!");
                 }
-                return "Hand two wins!";
-            }
-            if (hand1 == "scissors")
-            {
-                if (hand2 == "paper")
+                else if (player == "scissors")
                 {
-                    return "Hand one wins!";
+                    Console.WriteLine("Computer chooses Scissors, it's a tie!");
                 }
-                return "Hand two wins!";
+                else
+                {
+                    Console.WriteLine("=========================================");
+                    Console.WriteLine("YOU MUST CHOOSE ROCK, PAPER, OR SCISSORS!");
+                    Console.WriteLine("=========================================");
+                }
+            }
+            
+            if (computer == 1)
+            {
+                if (player == "rock")
+                {
+                    Console.WriteLine("Computer chooses Paper, you lose!");
+                }
+                else if (player == "paper")
+                {
+                    Console.WriteLine("Computer chooses Scissors, you lose!");
+                }
+                else if (player == "scissors")
+                {
+                    Console.WriteLine("Computer chooses Rock, you lose!");
+                }
+                else
+                {
+                    Console.WriteLine("=========================================");
+                    Console.WriteLine("YOU MUST CHOOSE ROCK, PAPER, OR SCISSORS!");
+                    Console.WriteLine("=========================================");
+                }
             }
 
-            return hand1 + ' ' + hand2;
+            if (computer == 2)
+            {
+                if (player == "rock")
+                {
+                    Console.WriteLine("Computer chooses Scissors, you win!");
+                }
+                else if (player == "paper")
+                {
+                    Console.WriteLine("Computer chooses Rock, you win!");
+                }
+                else if (player == "scissors")
+                {
+                    Console.WriteLine("Computer chooses Paper, you win!");
+                }
+                else
+                {
+                    Console.WriteLine("=========================================");
+                    Console.WriteLine("YOU MUST CHOOSE ROCK, PAPER, OR SCISSORS!");
+                    Console.WriteLine("=========================================");
+                }
+            }
+
+            return player + ' ' + computer;
         }
     }
 }

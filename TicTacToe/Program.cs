@@ -32,11 +32,13 @@ namespace TicTacToe
             int row = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter Column:");
             int column = int.Parse(Console.ReadLine());
+            PlaceMark(row, column);
         }
 
         public static void PlaceMark(int row, int column)
         {
         // your code goes here
+            board[row][column] = playerTurn;
         }
 
         public static bool CheckForWin()

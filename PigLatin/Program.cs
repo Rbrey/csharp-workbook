@@ -7,39 +7,45 @@ namespace PigLatin
         public static void Main()
         {
             // your code goes here
-            string input;
             Console.WriteLine("What do you need translated?");
-            input = Console.ReadLine();
-            Console.WriteLine(TranslateWord(input.ToLower()));
+            string input = Console.ReadLine();
+
             Console.WriteLine(TranslateSentence(input));
+
+            
+
+            // Console.WriteLine(TranslateWord(input.ToLower()));
         }
         
-        public static string TranslateWord(string input)
+        public static string TranslateWord(string word)
         {
             // your code goes here
-            int firstVowel = input.IndexOfAny(new char[] {'a', 'e', 'i', 'o', 'u'});
-
-            string partOne = input.Substring(0,firstVowel);
-            string partTwo = input.Substring(firstVowel);
-            input = input.ToLower();
+            int firstVowel = word.IndexOfAny(new char[] {'a', 'e', 'i', 'o', 'u', 'y'});
 
             if (firstVowel == 0)
             {
-                return input + "yay";
+                return word + "yay";
             }
             else
             {
+                string partOne = word.Substring(0,firstVowel);
+                string partTwo = word.Substring(firstVowel);
+
                 return partTwo + partOne + "ay";
             }
         }
         
-        public static string TranslateSentence(string input)
+        public static string TranslateSentence(string sentence)
         {
-            foreach (string word in input.Split())
+            string[] words = sentence.Split(' ');
+            string[] TranslatedWords = new string[words.Length];
+
+            for (int i = 0; i < words.Length; i++)
             {
-                TranslateWord(input);
+                TranslatedWords[i] = TranslateWord(words[i]);
             }
-            return TranslateWord(input);
+
+            return string.Join(" ", TranslatedWords);
         }
     }
 }

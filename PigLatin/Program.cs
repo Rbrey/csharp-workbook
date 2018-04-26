@@ -12,9 +12,6 @@ namespace PigLatin
             input = Console.ReadLine();
             Console.WriteLine(TranslateWord(input.ToLower()));
             Console.WriteLine(TranslateSentence(input));
-            // leave this command at the end so your program does not close automatically
-            
-            Console.ReadLine();
         }
         
         public static string TranslateWord(string input)
@@ -34,18 +31,15 @@ namespace PigLatin
             {
                 return partTwo + partOne + "ay";
             }
-            
         }
         
-        public static string TranslateSentence(string sentence)
+        public static string TranslateSentence(string input)
         {
-            string[] words = sentence.Split(' ');
-
-            for (int i =0; i < words.Length; i++)
+            foreach (string word in input.Split())
             {
-                words[i] = TranslateWord(words[i]);
+                TranslateWord(input);
             }
-            return string sentence String = string.Join(' ', sentence);
+            return TranslateWord(input);
         }
     }
 }

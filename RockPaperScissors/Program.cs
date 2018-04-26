@@ -130,3 +130,11 @@ namespace RockPaperScissors
         }
     }
 }
+
+
+// ***Notes***
+// string[] plays = new []  { "rock", "paper", "scissors" };
+
+// random rnd = new random();
+// int randomInteger = randomInteger.next(0, 3);
+// string hand2 = plays[randomInteger];

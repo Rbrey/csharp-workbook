@@ -7,44 +7,45 @@ namespace PigLatin
         public static void Main()
         {
             // your code goes here
-            string word = "";
+            string input;
             Console.WriteLine("What do you need translated?");
-            word = Console.ReadLine();
-            Console.WriteLine(TranslateWord(word.ToLower()));
+            input = Console.ReadLine();
+            Console.WriteLine(TranslateWord(input.ToLower()));
+            Console.WriteLine(TranslateSentence(input));
             // leave this command at the end so your program does not close automatically
             
             Console.ReadLine();
         }
         
-        public static string TranslateWord(string word)
+        public static string TranslateWord(string input)
         {
             // your code goes here
-            int firstVowel = word.IndexOfAny(new char[] {'a', 'e', 'i', 'o', 'u'});
+            int firstVowel = input.IndexOfAny(new char[] {'a', 'e', 'i', 'o', 'u'});
 
-            string partOne = word.Substring(0,firstVowel);
-            string partTwo = word.Substring(firstVowel);
-            word = word.ToLower();
+            string partOne = input.Substring(0,firstVowel);
+            string partTwo = input.Substring(firstVowel);
+            input = input.ToLower();
 
             if (firstVowel == 0)
             {
-                return word + "yay";
+                return input + "yay";
             }
             else
             {
                 return partTwo + partOne + "ay";
             }
+            
+        }
+        
+        public static string TranslateSentence(string sentence)
+        {
+            string[] words = sentence.Split(' ');
 
-            string[] words = word.Split(' ');
-            string[] sentence = new string[] {};
             for (int i =0; i < words.Length; i++)
             {
-                sentence[i] = words[i];
+                words[i] = TranslateWord(words[i]);
             }
-            string sentenceString = string.Join(' ', sentence);
-            Console.WriteLine(sentenceString);
-
-            return firstVowel.ToString();
-            return word;
+            return string sentence String = string.Join(' ', sentence);
         }
     }
 }

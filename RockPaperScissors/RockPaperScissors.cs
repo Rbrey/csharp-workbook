@@ -4,6 +4,7 @@ namespace RockPaperScissors
 {
     class Program
     {
+        public static string[] comphand = new string[] { "rock", "paper", "scissors" };
         public static void Main()
         {
             bool keepPlaying = true;
@@ -21,8 +22,7 @@ namespace RockPaperScissors
                 Console.WriteLine("==================");
                 string player = Console.ReadLine().ToLower();
                 // Computer
-                Random comphand = new Random();
-                int computer = comphand.Next(3);
+                string computer = RandomPlay();
                 // Scoring
                 if (computer == 1)
                 {
@@ -56,6 +56,13 @@ namespace RockPaperScissors
             
             // leave this command at the end so your program does not close automatically
             // Console.ReadLine();
+        }
+        public static string RandomPlay()
+        {
+            // Computer
+            Random rnd = new Random();
+            int computer = rnd.Next(3);
+            return comphand[computer];
         }
         public static string CompareHands(string player, int computer)
         {
@@ -138,3 +145,17 @@ namespace RockPaperScissors
 // random rnd = new random();
 // int randomInteger = randomInteger.next(0, 3);
 // string hand2 = plays[randomInteger];
+
+// Easy Compare Hands
+// if (difference == 1 || difference == 2)
+// {
+//     hand2 wins
+// }
+// if (difference == -1 || difference == -2)
+// {
+//     hand1 wins
+// }
+// if (difference == 0)
+// {
+//     hands tie
+// }

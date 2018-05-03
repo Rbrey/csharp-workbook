@@ -53,9 +53,6 @@ namespace RockPaperScissors
             // ConsoleKeyInfo cki = Console.ReadKey();
             // keepPlaying = cki.KeyChar == 'y';
             // Console.Clear();
-            
-            // leave this command at the end so your program does not close automatically
-            // Console.ReadLine();
         }
         public static string RandomPlay()
         {

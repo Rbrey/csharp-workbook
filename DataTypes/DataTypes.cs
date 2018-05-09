@@ -34,6 +34,7 @@ namespace DataTypes
             {
                 Console.WriteLine("You did not take the stick.");
                 int stick = 0;
+                Console.WriteLine(stick);
             }
 
             Console.WriteLine("As you proceed further into the cave, you see a small glowing object.");

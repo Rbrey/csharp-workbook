@@ -24,14 +24,14 @@ namespace RockPaperScissors
                 // Computer
                 string computer = RandomPlay();
                 // Scoring
-                if (computer == 1)
-                {
-                    cScore++;
-                }
-                else if (computer == 2)
-                {
-                    pScore++;
-                }
+                // if (computer == 1)
+                // {
+                //     cScore++;
+                // }
+                // else if (computer == 2)
+                // {
+                //     pScore++;
+                // }
                 // Win
                 if (cScore == 5)
                 {
@@ -42,7 +42,7 @@ namespace RockPaperScissors
                     Console.WriteLine("PLAYER WINS!");
                 }
 
-                Console.WriteLine(CompareHands(player, computer));
+                // Console.WriteLine(CompareHands(player, computer));
                 Console.WriteLine("==========");
                 Console.WriteLine("Scoreboard");
                 Console.WriteLine("==========");

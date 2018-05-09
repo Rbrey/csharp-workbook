@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace OOP
+namespace StarWars
 {
     class Program
     {
         static void Main()
         {
             Person rebel = new Person("Leia", "Organa", "Rebel");
-            Person rebel2 = new Person("Luke", "Skywalker", "Rebel");
+            Person rebel = new Person("Luke", "Skywalker", "Rebel");
             Person imperial = new Person("Darth", "Vader", "Imperial");
             Ship xwing = new Ship("Rebel", "Fighter", 1);
             Ship falcon = new Ship("Rebel", "Smuggling", 2);
@@ -82,35 +82,14 @@ namespace OOP
      
      class Station
      {
-         private Ship[] ships;
+         private string Name;
+         private int Docks;
 
-         public Station (string name, string alliance, int docks)
+         public Station (string Name, string Alliance, int Docks)
          {
              this.Name = name;
-             this.Alliance = alliance;
-             this.ships = new Ship[docks];
+             this.Docks = docks;
          }
-         public string Name { get; set; }
          public string Alliance { get; set; }
-         public string Docks
-         {
-             get
-             {
-                 foreach (var ship in ships)
-                 {
-                     Console.WriteLine(String.Format("{0}", ship.Type));
-                 }
-                 return "That's Everything!";
-             }
-         }
-
-         public void EnterStation(Ship ship, int dock)
-        {
-            this.ships[dock] = ship;
-        }
-        public void ExitStation(int dock)
-        {
-            this.ships[dock] = null;
-        }
      }
 }

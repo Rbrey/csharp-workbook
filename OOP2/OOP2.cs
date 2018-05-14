@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 
-namespace StarWars
+namespace OOP
 {
     class Program
     {
         static void Main()
         {
-            Person rebel = new Person("Leia", "Organa", "Rebel");
-            Person rebel = new Person("Luke", "Skywalker", "Rebel");
-            Person imperial = new Person("Darth", "Vader", "Imperial");
+            Person leia = new Person("Leia", "Organa", "Rebel");
+            Person luke = new Person("Luke", "Skywalker", "Rebel");
+            Person vader = new Person("Darth", "Vader", "Imperial");
             Ship xwing = new Ship("Rebel", "Fighter", 1);
             Ship falcon = new Ship("Rebel", "Smuggling", 2);
             Ship tie = new Ship("Imperial", "Fighter", 1);
@@ -82,14 +82,35 @@ namespace StarWars
      
      class Station
      {
-         private string Name;
-         private int Docks;
+         private Ship[] ships;
 
-         public Station (string Name, string Alliance, int Docks)
+         public Station (string name, string alliance, int docks)
          {
              this.Name = name;
-             this.Docks = docks;
+             this.Alliance = alliance;
+             this.ships = new Ship[docks];
          }
+         public string Name { get; set; }
          public string Alliance { get; set; }
+         public string Docks
+         {
+             get
+             {
+                 foreach (var ship in ships)
+                 {
+                     Console.WriteLine(String.Format("{0}", ship.Type));
+                 }
+                 return "That's Everything!";
+             }
+         }
+
+         public void EnterStation(Ship ship, int dock)
+        {
+            this.ships[dock] = ship;
+        }
+        public void ExitStation(int dock)
+        {
+            this.ships[dock] = null;
+        }
      }
 }

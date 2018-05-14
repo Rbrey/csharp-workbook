@@ -4,113 +4,100 @@ namespace OOP
 {
     class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
-            Person rebel = new Person("Leia", "Organa", "Rebel");
-            Person rebel2 = new Person("Luke", "Skywalker", "Rebel");
-            Person imperial = new Person("Darth", "Vader", "Imperial");
-            Ship xwing = new Ship("Rebel", "Fighter", 1);
-            Ship falcon = new Ship("Rebel", "Smuggling", 2);
-            Ship tie = new Ship("Imperial", "Fighter", 1);
-            Station RBS = new Station("Rebel Space Station", "Rebel", 1);
-            Station DS = new Station("Death Star", "Imperial", 2);
-            Console.WriteLine("Hello World!");
+            // Car
+            Car arcticCar = new Car("white", 2);
+            Car wizardCar = new Car("rainbow", 2);
+            Car hippyCar = new Car("tiedye", 2);
+            // Garage
+            Garage largeGarage = new Garage(4);
+            // People
+            People lily = new People("Lily");
+            People james = new People("James");
+            People sue = new People("Sue");
 
-            int[] nums = new int[3] {1, 2, 3};
-            Console.WriteLine(nums.Length);
-        }
-    }
-     class Person
-     {
-         private string firstName;
-         private string lastName;
-         private string alliance;
-         public Person(string firstName, string lastName, string alliance)
-         {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.alliance = alliance;
-         }
-         public string FullName
-         {
-            get
-            {
-                return this.firstName + " " + this.lastName;
-            }
-            set
-            {
-                string[] names = value.Split(' ');
-                this.firstName = names[0];
-                this.lastName = names[1];
-            }
-         }
-     }
-     class Ship
-     {
-         private Person[] passengers;
+            arcticCar.PlacePeople(lily, 0);
+            arcticCar.PlacePeople(james, 1);
+            wizardCar.PlacePeople(sue, 0);
 
-         public Ship(string alliance, string type, int size)
-         {
-             this.Type = type;
-             this.Alliance = alliance;
-             this.passengers = new Person[size];
-         }
+            largeGarage.ParkCar(wizardCar, 0);
+            largeGarage.ParkCar(arcticCar, 1);
+            largeGarage.ParkCar(hippyCar, 3);
 
-        public string Type { get; set; }
-        public string Alliance { get; set; }
-        public string Passengers
-        {
-            get
-            {
-                foreach (var person in passengers)
-                {
-                    Console.WriteLine(String.Format("{0}", person.FullName));
-                }
-                return "That's Everybody!";
-            }
-        }
-
-        public void EnterShip(Person person, int seat)
-        {
-            this.passengers[seat] = person;
-        }
-        public void ExitShip(int seat)
-        {
-            this.passengers[seat] = null;
+            Console.WriteLine(largeGarage.Cars);
+            Console.WriteLine("");
+            Console.WriteLine(arcticCar.Passengers);
+            Console.WriteLine("");
+            Console.WriteLine(wizardCar.Passengers);
         }
      }
-     
-     class Station
-     {
-         private Ship[] ships;
 
-         public Station (string name, string alliance, int docks)
+     class Car
+     {
+         private People[] passengers;
+         public Car(string initialColor, int size)
          {
-             this.Name = name;
-             this.Alliance = alliance;
-             this.ships = new Ship[docks];
+             Color = initialColor;
+             this.passengers = new People[size];
          }
-         public string Name { get; set; }
-         public string Alliance { get; set; }
-         public string Docks
+         public string Color { get; private set; }
+         public int size { get; private set; }
+         public void PlacePeople (People person, int spot)
          {
-             get
+             passengers[spot] = person;
+         }
+         public string Passengers
+         {
+             get 
              {
-                 foreach (var ship in ships)
+                 for (int i = 0; i < passengers.Length; i++)
                  {
-                     Console.WriteLine(String.Format("{0}", ship.Type));
+                     if (passengers[i] != null)
+                     {
+                         Console.WriteLine(String.Format("{0} is in seat {1}.", passengers[i].Name, i));
+                     }
                  }
-                 return "That's Everything!";
+                 return "That's all!";
              }
          }
+     }
 
-         public void EnterStation(Ship ship, int dock)
-        {
-            this.ships[dock] = ship;
-        }
-        public void ExitStation(int dock)
-        {
-            this.ships[dock] = null;
-        }
+     class Garage
+     {
+         private Car[] cars;
+         public Garage(int initialSize)
+         {
+             Size = initialSize;
+             this.cars = new Car[initialSize];
+         }
+         public int Size { get; private set; }
+         public void ParkCar (Car car, int spot)
+         {
+             cars[spot] = car;
+         }
+         public string Cars
+         {
+             get 
+             {
+                 for (int i = 0; i < cars.Length; i++)
+                 {
+                     if (cars[i] != null)
+                     {
+                         Console.WriteLine(String.Format("The {0} car is in spot {1}.", cars[i].Color, i));
+                     }
+                 }
+                 return "That's all!";
+             }
+         }
+     }
+     
+     class People
+     {
+         public People(string firstName)
+         {
+             Name = firstName;
+         }
+         public string Name { get; private set; }
      }
 }

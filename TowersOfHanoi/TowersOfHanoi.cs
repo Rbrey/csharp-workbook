@@ -5,48 +5,52 @@ namespace TowersOfHanoi
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Stack  = new Stack();
-
+            TowerOfHanoi T = new TowerOfHanoi();
+            string cnumdiscs;
+            Console.Write("Enter the number of discs: ");
+            cnumdiscs = Console.ReadLine();
+            T.numdiscs = Convert.ToInt32(cnumdiscs);
+            T.moveTower(T.numdiscs, 1, 2, 3);
+            Console.ReadLine();
         }
     }
 
-    // class Game
-    // {
-    //     public Tower[] Towers { get; set; }
-
-    //     public Game()
-    //     {
-    //         this.Towers = new Dictionary
-
-    //         Dictionary<string, string[]> categories = new Dictionary<string, string[]>();
-
-    //         categories.Add("Stack A", new string[] {"","","",""});
-    //         categories.Add("Stack B", new string[] {"","","",""});
-    //         categories.Add("Stack C", new string[] {"","","",""});
-    //     }
-    // }
-
-    class Stack
+    class TowerOfHanoi
     {
-        private Block[] blocks;
-        public void PushBlock()
-        {
+        int m_numdiscs;
 
-        }
-        public void PopBlock()
+        public TowerOfHanoi()
         {
-
+            numdiscs = 0;
         }
-    }
-
-    class Block
-    {
-        public Block (int weight)
+        public TowerOfHanoi(int newval)
         {
-            this.Weight = weight;
+            numdiscs = newval;
         }
-        public int Weight { get; private set; }
-    }
+        public int numdiscs
+        {
+            get
+            {
+                return m_numdiscs;
+            }
+            set
+            {
+                if (value > 0)
+                {
+                    m_numdiscs = value;
+                }
+            }           
+        }
+        public void moveTower(int n, int from, int to, int other)
+        {
+            if (n > 0)
+            {
+                moveTower(n - 1, from, other, to);
+                Console.WriteLine("Move disc {0} from tower {1} to tower {2}", n, from, to);
+                moveTower(n -1, other, to, from);
+            }
+        }
+    }    
 }

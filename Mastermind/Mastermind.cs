@@ -57,14 +57,6 @@ namespace Mastermind
             }
             this.turn++;
             return $" {red} - {white - red}";
-            if (red == 4 && turn < 10)
-            {
-                Console.WriteLine("You Win!!");
-            }
-            else if (turn >= 10)
-            {
-                Console.WriteLine("You Lose!!");
-            }
         }
         public void AddRow(Row row)
         {

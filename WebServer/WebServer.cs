@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TowersOfHanoi
+namespace WebServer
 {
     class Program
     {

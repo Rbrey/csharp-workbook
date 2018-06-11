@@ -8,13 +8,9 @@ namespace Checkers
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("//////////////////////////////////");
-            Console.WriteLine("/////// WELCOME TO CHECKERS //////");
-            Console.WriteLine("//////////////////////////////////");
+            Game game = new Game();
 
-            Game newGame = new Game();
-            
-            Console.WriteLine("Hello There!");
+            Console.WriteLine("Hello World!");
         }
     }
 
@@ -22,20 +18,20 @@ namespace Checkers
 
     public class Checker
     {
-        public string Symbol  { get; set; }
-        public int[] Position  { get; set; }
+        public string Symbol { get; set; }
+        public int[] Position { get; set; }
         public string Color { get; set; }
-        
+
         public Checker(string color, int[] position)
         {
             string circleId;
             if (color == "white")
             {
-                circleId = "o";
+                circleId = "_o_";
             }
             else
             {
-                circleId = "x";
+                circleId = "_x_";
             }
             this.Symbol = circleId;
             this.Position = position;
@@ -47,27 +43,28 @@ namespace Checkers
     #region Board
     public class Board
     {
-        public string[][] Grid  { get; set; }
+        public string[][] Grid { get; set; }
         public List<Checker> Checkers { get; set; }
-        
+
         public Board()
-        {            
+        {
+            this.Checkers = new List<Checker>();
+            this.CreateBoard();
             return;
         }
         // CREATE CHECKERS BOARD
         public void CreateBoard()
         {
             // Your code here
-            this.Checkers = new List<Checker>();
             this.Grid = new string[][] {
-                new string[] {" ", " ", " ", " ", " ", " ", " ", " "},
-                new string[] {" ", " ", " ", " ", " ", " ", " ", " "},
-                new string[] {" ", " ", " ", " ", " ", " ", " ", " "},
-                new string[] {" ", " ", " ", " ", " ", " ", " ", " "},
-                new string[] {" ", " ", " ", " ", " ", " ", " ", " "},
-                new string[] {" ", " ", " ", " ", " ", " ", " ", " "},
-                new string[] {" ", " ", " ", " ", " ", " ", " ", " "},
-                new string[] {" ", " ", " ", " ", " ", " ", " ", " "}
+                new string[] {"_ _", "_ _", "_ _", "_ _", "_ _", "_ _", "_ _", "_ _"},
+                new string[] {"_ _", "_ _", "_ _", "_ _", "_ _", "_ _", "_ _", "_ _"},
+                new string[] {"_ _", "_ _", "_ _", "_ _", "_ _", "_ _", "_ _", "_ _"},
+                new string[] {"_ _", "_ _", "_ _", "_ _", "_ _", "_ _", "_ _", "_ _"},
+                new string[] {"_ _", "_ _", "_ _", "_ _", "_ _", "_ _", "_ _", "_ _"},
+                new string[] {"_ _", "_ _", "_ _", "_ _", "_ _", "_ _", "_ _", "_ _"},
+                new string[] {"_ _", "_ _", "_ _", "_ _", "_ _", "_ _", "_ _", "_ _"},
+                new string[] {"_ _", "_ _", "_ _", "_ _", "_ _", "_ _", "_ _", "_ _"}
             };
             return;
         }
@@ -79,11 +76,11 @@ namespace Checkers
             Console.WriteLine(" _|_0_|_1_|_2_|_3_|_4_|_5_|_6_|_7_");
             for (int i = 0; i < 8; i++)
             {
-                Console.WriteLine(i + " |_" + String.Join(" |_", this.Grid[i]));
+                Console.WriteLine(i + "_|" + String.Join("|", this.Grid[i]));
             }
             return;
         }
-        
+
         public void GenerateCheckers()
         {
             // Your code here
@@ -92,14 +89,13 @@ namespace Checkers
                 new int[] { 1, 0 }, new int[] { 1, 2 }, new int[] { 1, 4 }, new int[] { 1, 6 },
                 new int[] { 2, 1 }, new int[] { 2, 3 }, new int[] { 2, 5 }, new int[] { 2, 7 }
             };
-            
+
 
             int[][] blackPositions = new int[][] {
                 new int[] { 5, 0 }, new int[] { 5, 2 }, new int[] { 5, 4 }, new int[] { 5, 6 },
                 new int[] { 6, 1 }, new int[] { 6, 3 }, new int[] { 6, 5 }, new int[] { 6, 7 },
                 new int[] { 7, 0 }, new int[] { 7, 2 }, new int[] { 7, 4 }, new int[] { 7, 6 }
             };
-            
             for (int i = 0; i < 12; i++)
             {
                 Checker white = new Checker("white", whitePositions[i]);
@@ -109,7 +105,7 @@ namespace Checkers
             }
             return;
         }
-        
+
         public void PlaceCheckers()
         {
             foreach (var checker in Checkers)
@@ -118,22 +114,48 @@ namespace Checkers
             }
             return;
         }
-        
+
         public Checker SelectChecker(int row, int column)
         {
             return Checkers.Find(x => x.Position.SequenceEqual(new List<int> { row, column }));
         }
-        
-        public void RemoveChecker(int row, int column)
+
+        public void RemoveChecker(Checker checker)
         {
             // Your code here
-            // this.Checkers.Remove(checker);
+            this.Checkers.Remove(checker);
             return;
         }
-        
+
         public bool CheckForWin()
         {
             return Checkers.All(x => x.Color == "white") || !Checkers.Exists(x => x.Color == "white");
+        }
+
+        public void MoveChecker()
+        {
+            // PICK UP CHECKER
+            Console.WriteLine("Select Row:");
+            int pickUpRow = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Select Column:");
+            int pickUpColumn = Convert.ToInt32(Console.ReadLine());
+            Checker checker = SelectChecker(pickUpRow, pickUpColumn);
+            // REMOVE CHECKER
+            Console.WriteLine("`Move` or `Remove` Selected Checker?");
+            string moveRemove = Console.ReadLine().ToLower();
+            if (moveRemove == "remove")
+            {
+                RemoveChecker(checker);
+            }
+            else
+            {
+            // PLACEMENT OF CHECKER
+            Console.WriteLine("Enter Placement Row:");
+            int placementRow = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter Placement Column:");
+            int placementColumn = Convert.ToInt32(Console.ReadLine());
+            checker.Position = new int[] { placementRow, placementColumn };                
+            }
         }
     }
 
@@ -144,28 +166,18 @@ namespace Checkers
         public Game()
         {
             // Your code here
-            // CREATE ENTIRE BOARD
             Board board = new Board();
-            
+
             board.GenerateCheckers();
             board.DrawBoard();
-            // CHECKER MOVEMENT
-            // PICK UP CHECKER
-            Console.WriteLine("Enter Pickup Row:");
-            int pickUpRow = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Enter Pickup Column:");
-            int pickUpColumn = Convert.ToInt32(Console.ReadLine());
 
-            Checker checker = board.SelectChecker(pickUpRow, pickUpColumn);
-            // PLACEMENT OF CHECKER
-            Console.WriteLine("Enter Placement Row:");
-            int placementRow = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Enter Placement Column:");
-            int placementColumn = Convert.ToInt32(Console.ReadLine());
-
-            checker.Position = new int[] { placementRow, placementColumn };
-
-            board.DrawBoard();
+            while (board.CheckForWin())
+            {
+                // Checker Movement
+                board.MoveChecker();
+                // Redraw Board
+                board.DrawBoard();
+            }            
         }
     }
 }
